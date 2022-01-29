@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPCManager : MonoBehaviour
 {
     public float speed = 0.1f;
+    public float coreDamage = 1f;
 
     // Start is called before the first frame update
     void Start() {
@@ -20,5 +21,19 @@ public class NPCManager : MonoBehaviour
             yield return null;
         }
         yield return null;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        handleCollision(collision.collider);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        handleCollision(collision);
+    }
+
+    void handleCollision(Collider2D col) {
+        if (col.tag == "Core") {
+            col.GetComponent<CoreManager>().TakeDamage(coreDamage);
+        }
     }
 }
