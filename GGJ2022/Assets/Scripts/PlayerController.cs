@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
 
     public Animator anim;
 
+    public GameObject buildModeObject;
+
+    public bool buildModeEnabled = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +49,26 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("isMoving", false);
         }
+
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            ToggleBuildMode();
+        }
+
+        if (buildModeEnabled)
+        {
+            buildModeObject.gameObject.SetActive(true);
+        }
+        else
+        {
+            buildModeObject.gameObject.SetActive(false);
+        }
+    }
+
+    public void ToggleBuildMode()
+    {
+        buildModeEnabled = !buildModeEnabled;
     }
 
     private void OnTriggerStay2D(Collider2D collision)

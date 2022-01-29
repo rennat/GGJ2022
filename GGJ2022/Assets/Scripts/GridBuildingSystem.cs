@@ -116,7 +116,7 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
-        temp = Instantiate(building, Vector3.zero, Quaternion.identity).GetComponent<Building>();
+        temp = Instantiate(building, new Vector3(1000, 1000, 1), Quaternion.identity).GetComponent<Building>();
         FollowBuilding();
     }
     
