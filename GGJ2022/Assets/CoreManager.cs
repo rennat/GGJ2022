@@ -9,6 +9,7 @@ public class CoreManager : MonoBehaviour
     public TMP_Text healthText;
 
     float curHealth;
+    bool dead = false;
 
     private void Start() {
         curHealth = totalHealth;
@@ -16,7 +17,10 @@ public class CoreManager : MonoBehaviour
     }
 
     public void TakeDamage(float damage) {
-        curHealth -= damage;
+        if (dead)
+            return;
+
+        curHealth = Mathf.Max(curHealth - damage, 0f);
         healthText.text = curHealth.ToString();
 
         if (curHealth <= 0f) {
@@ -25,6 +29,8 @@ public class CoreManager : MonoBehaviour
     }
 
     void Die() {
+        dead = true;
         Debug.LogError("Game Over");
+        GameManager.EndGame();
     }
 }
