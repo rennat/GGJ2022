@@ -7,7 +7,7 @@ public class PlayerInfo : MonoBehaviour
     public static PlayerInfo instance;
 
     public float playerMineSpeed = 1f;
-    public int currentHealth;
+    public float currentHealth;
     public int maxHealth;
     public int wood = 0;
 
@@ -40,12 +40,13 @@ public class PlayerInfo : MonoBehaviour
         
     }
 
-    public void DamagePlayer(int amount)
+    public void DamagePlayer(float amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
             PlayerController.instance.gameObject.SetActive(false);
+            GameManager.EndGame();
         }
 
         UIController.instance.healthSlider.value = currentHealth;

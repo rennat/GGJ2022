@@ -10,10 +10,12 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
     public float speed = 0.1f;
     public float coreDamage = 1f;
     public float coreDamageTick = 1f;
+    public float playerDamage = 2f;
     public string mode = "wander";
     public float wanderRadius = 0.5f;
     float curHealth;
     float curCoreDamage;
+    float curPlayerDamage;
 
     bool damagingCore = false;
     NavMeshAgent agent;
@@ -34,6 +36,7 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
 
     IEnumerator MoveCoroutine() {
         curCoreDamage = coreDamage;
+        curPlayerDamage = playerDamage;
 
         // Pick a target point
         Vector2 target = Vector2.zero;
@@ -49,6 +52,7 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
     IEnumerator WanderCoroutine() {
         while (mode == "wander") {
             curCoreDamage = 0f;
+            curPlayerDamage = 0f;
 
             Vector2 newTarget = transform.position + new Vector3(Random.Range(-wanderRadius, wanderRadius), Random.Range(-wanderRadius, wanderRadius));
 
@@ -62,6 +66,7 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
 
     IEnumerator FleeCoroutine() {
         curCoreDamage = 0f;
+        curPlayerDamage = 0f;
 
         // Pick a target point
         Vector2 target = UnityEngine.Random.insideUnitCircle.normalized * 9f;
@@ -139,6 +144,9 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
                 Disarm();
             }
             Destroy(projectile.gameObject);
+        } else if (col.tag == "Player") {
+            if (PlayerInfo.instance != null)
+                PlayerInfo.instance.DamagePlayer(curPlayerDamage);
         }
     }
 
