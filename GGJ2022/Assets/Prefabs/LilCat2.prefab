@@ -133,6 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   coreDamage: 25
+  mode: rush
+  wanderRadius: 0.5
 --- !u!50 &-5121980904728593087
 Rigidbody2D:
   serializedVersion: 4

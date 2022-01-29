@@ -6,10 +6,12 @@ using TMPro;
 
 public class PhaseManager : MonoBehaviour
 {
-    public GameObject[] spawnPoints;
+    public GameObject[] wanderSpawnPoints;
+    public GameObject[] rushSpawnPoints;
     public int curDay = 0;
     public int curPhase = 0;
     public float tickTime = 1f;
+    public float wanderSpawnRadius = 0.3f;
 
     public TMP_Text dayLabel;
     public TMP_Text phaseLabel;
@@ -43,7 +45,7 @@ public class PhaseManager : MonoBehaviour
             DayDefinition thisDay = dayConfig[i];
             float curPhaseTime = 0f;
 
-            StartCoroutine(SpawnNPCs(thisDay.phase1NPCCount, thisDay.phase1Duration, thisDay.phase1NPCType));
+            StartCoroutine(SpawnWanderNPCs(thisDay.phase1NPCCount, thisDay.phase1NPCType));
             while (curPhaseTime < dayConfig[i].phase1Duration) {
                 if (winConditionMet()) {
                     yield break;
@@ -57,7 +59,9 @@ public class PhaseManager : MonoBehaviour
             curPhase = 2;
             updateUI(curDay, curPhase);
 
-            StartCoroutine(SpawnNPCs(thisDay.phase2NPCCount, thisDay.phase2Duration, thisDay.phase2NPCType));
+            convertNPCs();
+
+            StartCoroutine(SpawnRushNPCs(thisDay.phase2NPCCount, thisDay.phase2Duration, thisDay.phase2NPCType));
             while (curPhaseTime < dayConfig[i].phase2Duration) {
                 if (winConditionMet()) {
                     yield break;
@@ -70,11 +74,24 @@ public class PhaseManager : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator SpawnNPCs(int numNPCs, float duration, GameObject npcType) {
+    IEnumerator SpawnWanderNPCs(int numNPCs, GameObject npcType) {
+        for (int i = 0; i < numNPCs; i++) {
+            // Pick a random spawn point
+            GameObject curSpawn = wanderSpawnPoints[UnityEngine.Random.Range(0, wanderSpawnPoints.Length)];
+            if (curSpawn != null) {
+                GameObject newNPC = Instantiate(npcType, this.transform);
+                newNPC.transform.position = curSpawn.transform.position + new Vector3(UnityEngine.Random.Range(-wanderSpawnRadius, wanderSpawnRadius), UnityEngine.Random.Range(-wanderSpawnRadius, wanderSpawnRadius));
+            }
+            yield return null;
+        }
+        yield return null;
+    }
+
+    IEnumerator SpawnRushNPCs(int numNPCs, float duration, GameObject npcType) {
         float waitTime = duration / numNPCs;
         for (int i = 0; i < numNPCs; i++) {
             // Pick a random spawn point
-            GameObject curSpawn = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
+            GameObject curSpawn = rushSpawnPoints[UnityEngine.Random.Range(0, rushSpawnPoints.Length)];
             if (curSpawn != null) {
                 GameObject newNPC = Instantiate(npcType, this.transform);
                 newNPC.transform.position = curSpawn.transform.position;
@@ -104,5 +121,11 @@ public class PhaseManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(time - minutes * 60f);
         string niceTime = string.Format("{0:00}:{1:00}", minutes, seconds);
         modeTimer.text = niceTime;
+    }
+
+    void convertNPCs() {
+        foreach (NPCManager liveNPC in GetComponentsInChildren<NPCManager> ()) {
+            liveNPC.convert();
+        }
     }
 }
