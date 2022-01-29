@@ -8,10 +8,13 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
     public float totalHealth = 100f;
     public float speed = 0.1f;
     public float coreDamage = 1f;
+    public float coreDamageTick = 1f;
     public string mode = "wander";
     public float wanderRadius = 0.5f;
     float curHealth;
     float curCoreDamage;
+
+    bool damagingCore = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -84,6 +87,7 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
     }
 
     public void Die() {
+        damagingCore = false;
         StopAllCoroutines();
         Destroy(this);
     }
@@ -96,9 +100,35 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
         handleCollision(collision);
     }
 
+    private void OnCollisionExit2D(Collision2D collision) {
+        handleCollisionExit(collision.collider);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        handleCollisionExit(collision);
+    }
+
     void handleCollision(Collider2D col) {
         if (col.tag == "Core") {
-            col.GetComponent<CoreManager>().TakeDamage(curCoreDamage);
+            if (!damagingCore)
+                StartCoroutine(DoCoreDamageCoroutine(col.GetComponent<CoreManager>()));
+        }
+    }
+
+    void handleCollisionExit(Collider2D col) {
+        if (col.tag == "Core") {
+            damagingCore = false;
+        }
+    }
+
+    IEnumerator DoCoreDamageCoroutine(CoreManager core) {
+        if (damagingCore || core == null)
+            yield break;
+
+        damagingCore = true;
+        while (damagingCore) {
+            core.TakeDamage(curCoreDamage);
+            yield return new WaitForSeconds(coreDamageTick);
         }
     }
 
