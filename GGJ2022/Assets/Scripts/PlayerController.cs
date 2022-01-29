@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody2D theRB;
 
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
 
+        theRB.velocity = moveInput * moveSpeed;
+
         if (moveInput.x > 0f)
         {
             transform.localScale = new Vector2(1, 1);
@@ -32,8 +35,13 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector2(-1, 1);
         }
 
-        // transform.position += new Vector3(moveInput.x * Time.deltaTime * moveSpeed, moveInput.y * Time.deltaTime * moveSpeed, 0f);
-
-        theRB.velocity = moveInput * moveSpeed;
+        if (moveInput != Vector2.zero)
+        {
+            anim.SetBool("isMoving", true);
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
+        }
     }
 }
