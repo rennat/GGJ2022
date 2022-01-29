@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public float restartDelay = 3f;
+    public GameObject gameOverPanel;
 
     public enum GameState {
         Active,
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Ended;
 
         // Display game over screen
+        instance.gameOverPanel.SetActive(true);
 
         // Wait for seconds and restart scene
         if (instance != null)

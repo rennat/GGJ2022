@@ -30,7 +30,6 @@ public class CoreManager : MonoBehaviour
 
     void Die() {
         dead = true;
-        Debug.LogError("Game Over");
         GameManager.EndGame();
     }
 }
