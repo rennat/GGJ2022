@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 2349529508640068996}
   - component: {fileID: -5121980904728593087}
   - component: {fileID: 5511910554853363237}
+  - component: {fileID: 8486214870294649101}
   m_Layer: 0
   m_Name: LilCat2
   m_TagString: Untagged
@@ -131,8 +132,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83044cefca38e44985f642808dd8694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalHealth: 100
   speed: 0.5
   coreDamage: 25
+  coreDamageTick: 1
   mode: rush
   wanderRadius: 0.5
 --- !u!50 &-5121980904728593087
@@ -182,3 +185,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!195 &8486214870294649101
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185346516580382019}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
