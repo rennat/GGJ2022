@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
             ToggleBuildMode();
         }
 
+        /*
         if (buildModeEnabled)
         {
             buildModeObject.gameObject.SetActive(true);
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
         {
             buildModeObject.gameObject.SetActive(false);
         }
+        */
     }
 
     public void ToggleBuildMode()

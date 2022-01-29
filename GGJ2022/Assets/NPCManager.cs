@@ -130,6 +130,15 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
         if (col.tag == "Core") {
             if (!damagingCore)
                 StartCoroutine(DoCoreDamageCoroutine(col.GetComponent<CoreManager>()));
+        } else if (col.tag == "Projectile") {
+            Projectile projectile = col.GetComponent<Projectile>();
+            if (mode == "wander")
+                Disarm();
+            else if (mode == "rush") {
+                //TakeDamage(projectile.damage);
+                Disarm();
+            }
+            Destroy(projectile.gameObject);
         }
     }
 
