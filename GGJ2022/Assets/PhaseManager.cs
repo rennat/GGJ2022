@@ -125,7 +125,7 @@ public class PhaseManager : MonoBehaviour
 
     void convertNPCs() {
         foreach (NPCManager liveNPC in GetComponentsInChildren<NPCManager> ()) {
-            liveNPC.convert();
+            liveNPC.Convert();
         }
     }
 }

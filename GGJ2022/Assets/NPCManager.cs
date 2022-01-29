@@ -59,10 +59,11 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
             transform.position = Vector2.Lerp(transform.position, target, Time.deltaTime * 1f);
             yield return null;
         }
+        Die();
         yield return null;
     }
 
-    public void convert() {
+    public void Convert() {
         if (mode == "wander") {
             StopAllCoroutines();
             mode = "rush";
@@ -70,9 +71,21 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void disarm() {
+    public void Disarm() {
         StopAllCoroutines();
         StartCoroutine(FleeCoroutine());
+    }
+
+    public void TakeDamage(float damage) {
+        curHealth -= damage;
+        if (curHealth <= 0)
+            Die();
+
+    }
+
+    public void Die() {
+        StopAllCoroutines();
+        Destroy(this);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
@@ -90,6 +103,6 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        disarm();
+        Disarm();
     }
 }
