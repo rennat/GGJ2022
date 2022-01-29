@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -42,6 +41,16 @@ public class PlayerController : MonoBehaviour
         else
         {
             anim.SetBool("isMoving", false);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Tree" && Input.GetKey(KeyCode.E))
+        {
+            Debug.Log("Hello");
+            collision.GetComponent<HarvestScript>().Chopped();
+            collision.GetComponent<HarvestScript>().Harvesting();
         }
     }
 }
