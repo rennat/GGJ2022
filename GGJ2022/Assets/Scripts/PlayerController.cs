@@ -89,6 +89,17 @@ public class PlayerController : MonoBehaviour
         {
             collision.GetComponent<HarvestScript>().Chopped();
             collision.GetComponent<HarvestScript>().Harvesting();
+        } else if (collision.tag == "Tree" && !Input.GetKey(KeyCode.E))
+        {
+            collision.GetComponent<HarvestScript>().StopSound();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Tree")
+        {
+            collision.GetComponent<HarvestScript>().StopSound();
         }
     }
 }

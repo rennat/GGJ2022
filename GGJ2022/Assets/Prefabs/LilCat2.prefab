@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalHealth: 100
-  speed: 0.5
+  speed: 2
   coreDamage: 25
   coreDamageTick: 1
   playerDamage: 2
