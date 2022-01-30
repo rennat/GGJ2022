@@ -57,4 +57,10 @@ public class PlayerInfo : MonoBehaviour
         wood += amount;
         UIController.instance.woodText.text = wood.ToString();
     }
+
+    public void SubtractWood(int amount)
+    {
+        wood -= amount;
+        UIController.instance.woodText.text = wood.ToString();
+    }
 }

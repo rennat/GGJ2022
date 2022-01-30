@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject buildModeObject;
 
+    public GameObject gridManager;
+
     public bool buildModeEnabled = false;
 
     // Start is called before the first frame update
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B))
         {
+            gridManager.GetComponent<GridBuildingSystem>().ClearArea();
             ToggleBuildMode();
         }
 
@@ -68,14 +71,20 @@ public class PlayerController : MonoBehaviour
 
     public void ToggleBuildMode()
     {
-        buildModeEnabled = !buildModeEnabled;
+        if (!gridManager.GetComponent<GridBuildingSystem>().isBuilding)
+        {
+            if (gridManager.GetComponent<GridBuildingSystem>().tempToggleEnabled) 
+            {
+                gridManager.GetComponent<GridBuildingSystem>().ToggleTemp();
+            }
+            buildModeEnabled = !buildModeEnabled;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Tree" && Input.GetKey(KeyCode.E))
         {
-            Debug.Log("Hello");
             collision.GetComponent<HarvestScript>().Chopped();
             collision.GetComponent<HarvestScript>().Harvesting();
         }

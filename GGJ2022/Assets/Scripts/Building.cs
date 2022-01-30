@@ -6,6 +6,7 @@ public class Building : MonoBehaviour
 {
     public bool Placed { get; private set; }
     public BoundsInt area;
+    public int cost;
 
     // Start is called before the first frame update
     void Start()
