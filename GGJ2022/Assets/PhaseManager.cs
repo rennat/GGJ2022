@@ -14,9 +14,12 @@ public class PhaseManager : MonoBehaviour
         Survive
     }
 
-    private static PhaseManager _instance;
-    public static Phase CurrentPhase => (Phase)_instance.CurPhase;
+    public delegate void PhaseDelegate(Phase currentPhase, Phase previousPhase);
 
+    private static PhaseManager _instance;
+    public static PhaseManager Instance => _instance;
+    public static Phase CurrentPhase => (Phase)_instance.CurPhase;
+    public static PhaseDelegate OnPhaseChanged;
 
     public GameObject[] wanderSpawnPoints;
     public GameObject[] rushSpawnPoints;
@@ -29,9 +32,6 @@ public class PhaseManager : MonoBehaviour
     public TMP_Text modeLabel;
     public TMP_Text modeTimer;
 
-    public UnityEvent OnStartPrepare;
-    public UnityEvent OnStartSurvive;
-
     private Phase curPhase = Phase.Default;
     public Phase CurPhase
     {
@@ -40,16 +40,9 @@ public class PhaseManager : MonoBehaviour
         {
             if (curPhase != value)
             {
+                var prevPhase = curPhase;
                 curPhase = value;
-                switch (curPhase)
-                {
-                    case Phase.Prepare:
-                        OnStartPrepare.Invoke();
-                        break;
-                    case Phase.Survive:
-                        OnStartSurvive.Invoke();
-                        break;
-                }
+                OnPhaseChanged?.Invoke(curPhase, prevPhase);
             }
         }
     }
