@@ -76,6 +76,7 @@ public class PhaseManager : MonoBehaviour
             curDay = i+1;
             CurPhase = Phase.Prepare;
             updateUI(curDay, CurPhase);
+            TreeSpawner.SpawnNewTrees();
 
             DayDefinition thisDay = dayConfig[i];
             float curPhaseTime = 0f;
