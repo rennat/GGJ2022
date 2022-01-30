@@ -143,7 +143,7 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
             if (PlayerInfo.instance != null)
                 PlayerInfo.instance.GainXP();
         } else if (col.tag == "Player") {
-            if (PlayerInfo.instance != null)
+            if (PlayerInfo.instance != null) { }
                 PlayerInfo.instance.DamagePlayer(curPlayerDamage);
         }
     }

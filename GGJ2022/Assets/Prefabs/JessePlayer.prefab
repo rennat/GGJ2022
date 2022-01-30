@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6536805691201314867}
   - component: {fileID: 6536805691201314868}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 6536805692243951802}
   - component: {fileID: 6536805692243951803}
   - component: {fileID: 6536805692243951801}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: JessePlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   theRB: {fileID: 6536805692243951803}
   anim: {fileID: 6536805692243951801}
   buildModeObject: {fileID: 0}
+  gridManager: {fileID: 0}
   buildModeEnabled: 0
 --- !u!58 &6536805692243951802
 CircleCollider2D:
@@ -205,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6536805692347768942}
   - component: {fileID: 6536805692347768943}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
