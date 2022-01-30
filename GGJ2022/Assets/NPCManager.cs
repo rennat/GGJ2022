@@ -41,6 +41,7 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
         // Pick a target point
         Vector2 target = Vector2.zero;
         agent.SetDestination(target);
+        agent.speed = this.speed;
         
         while (Vector2.Distance(transform.position, target) > 0.1f) {
             //transform.position = Vector2.Lerp(transform.position, target, Time.deltaTime * speed);
