@@ -13,9 +13,11 @@ public class PhaseManager : MonoBehaviour
         Prepare,
         Survive
     }
+    public delegate void PhaseChangeDelegate(Phase newPhase);
 
     private static PhaseManager _instance;
-    public static Phase CurrentPhase => (Phase)_instance.CurPhase;
+    public static Phase CurrentPhase => _instance.CurPhase;
+    public static PhaseChangeDelegate OnPhaseChange;
 
 
     public GameObject[] wanderSpawnPoints;
@@ -23,14 +25,10 @@ public class PhaseManager : MonoBehaviour
     public int curDay = 0;
     public float tickTime = 1f;
     public float wanderSpawnRadius = 0.3f;
-    public GameObject rainEffect;
 
     public TMP_Text dayLabel;
     public TMP_Text modeLabel;
     public TMP_Text modeTimer;
-
-    public UnityEvent OnStartPrepare;
-    public UnityEvent OnStartSurvive;
 
     private Phase curPhase = Phase.Default;
     public Phase CurPhase
@@ -41,15 +39,7 @@ public class PhaseManager : MonoBehaviour
             if (curPhase != value)
             {
                 curPhase = value;
-                switch (curPhase)
-                {
-                    case Phase.Prepare:
-                        OnStartPrepare.Invoke();
-                        break;
-                    case Phase.Survive:
-                        OnStartSurvive.Invoke();
-                        break;
-                }
+                OnPhaseChange?.Invoke(curPhase);
             }
         }
     }
@@ -86,7 +76,6 @@ public class PhaseManager : MonoBehaviour
             curDay = i+1;
             CurPhase = Phase.Prepare;
             updateUI(curDay, CurPhase);
-            rainEffect.SetActive(false);
 
             DayDefinition thisDay = dayConfig[i];
             float curPhaseTime = 0f;
@@ -105,7 +94,6 @@ public class PhaseManager : MonoBehaviour
             CurPhase = Phase.Survive;
             updateUI(curDay, CurPhase);
             convertNPCs();
-            rainEffect.SetActive(true);
 
             StartCoroutine(SpawnRushNPCs(thisDay.phase2NPCCount, thisDay.phase2Duration, thisDay.phase2NPCType));
             while (curPhaseTime < dayConfig[i].phase2Duration) {
