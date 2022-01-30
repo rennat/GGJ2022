@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
-    public float damage = 10f;
-    public float speed = 0.5f;
-    public float lifespan = 3f;
-    public float aoeRadius = -1f;
-    public int aoeLimit = 0;
-    public bool heatSeeking = false;
+    public WeaponStats weaponStats;
+    public GameObject impactPrefab;
+    public float damage => weaponStats.ProjectileDamage;
+    public float speed => weaponStats.ProjectileSpeed;
+    public float lifespan => weaponStats.ProjectileLifespan;
+    public float aoeRadius => weaponStats.AoeRadius;
+    public int aoeLimit => (int)weaponStats.AoeLimit;
+    public bool heatSeeking => weaponStats.ProjectileHoming >= 1;
     GameObject target = null;
     Vector3 originalTargetPos = Vector3.zero;
     Vector3 originPos = Vector3.zero;
@@ -63,5 +65,13 @@ public class Projectile : MonoBehaviour {
             }
         }
         Destroy(gameObject);
+    }
+
+    public void OnDestroy()
+    {
+        if (impactPrefab != null)
+        {
+            Instantiate(impactPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

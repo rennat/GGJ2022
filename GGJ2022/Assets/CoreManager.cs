@@ -17,6 +17,7 @@ public class CoreManager : MonoBehaviour
     }
 
     public void TakeDamage(float damage) {
+        AudioManager.CoreTakesDamage();
         if (dead)
             return;
 

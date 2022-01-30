@@ -3,14 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AutoAttackWeapon : MonoBehaviour {
-    public float autoTick = 1f;
-    public float detectRadius = 2f;
+    public WeaponStats weaponStats;
+    public float autoTick => 1/weaponStats.RateOfFire;
+    public float detectRadius => weaponStats.Range;
     public Projectile projectile;
+    public Transform rangePreview;
+
+    private AudioSource audioSource;
 
     bool attacking = false;
 
     private void Start() {
         AttackMode();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        rangePreview.localScale = Vector3.one * weaponStats.Range * 2;
     }
 
     public void AttackMode() {
@@ -23,18 +33,26 @@ public class AutoAttackWeapon : MonoBehaviour {
 
     IEnumerator autoAttack() {
         while (attacking) {
-            // Find closest enemy
-            GameObject closestEnemy = findClosestEnemy();
+            for (int i = 0; i < weaponStats.ProjectileCount; i++)
+            {
+                // Find closest enemy
+                GameObject closestEnemy = findClosestEnemy();
 
-            // Attack
-            if (closestEnemy != null) {
-                GameObject go = Instantiate(projectile.gameObject);
-                go.transform.position = transform.position;
-                go.GetComponent<Projectile>().SetTarget(closestEnemy);
+                // Attack
+                if (closestEnemy != null)
+                {
+                    if (audioSource != null)
+                    {
+                        audioSource.PlayOneShot(audioSource.clip, audioSource.volume);
+                    }
+                    GameObject go = Instantiate(projectile.gameObject);
+                    go.transform.position = transform.position;
+                    go.GetComponent<Projectile>().SetTarget(closestEnemy);
+                }
+
+                // Wait
+                yield return new WaitForSeconds(autoTick);
             }
-
-            // Wait
-            yield return new WaitForSeconds(autoTick); 
         }
     }
 

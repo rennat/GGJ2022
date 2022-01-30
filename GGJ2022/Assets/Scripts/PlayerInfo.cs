@@ -1,10 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
 {
+    [System.Serializable]
+    public class PowerUpTrack
+    {
+        public Sprite icon;
+        public GameObject weapon;
+        public WeaponStats weaponStats;
+        public PowerUp prefab;
+    }
+
     public static PlayerInfo instance;
+    public delegate void PlayerTakesDamageDelegate(float amount);
+    public static PlayerTakesDamageDelegate OnPlayerTakesDamage;
 
     public float playerMineSpeed = 1f;
     public float currentHealth;
@@ -13,7 +25,7 @@ public class PlayerInfo : MonoBehaviour
     public int wood = 0;
     public float levelBaseXP = 500f;
     public float levelXPMultiplier = 1.2f;
-    public GameObject[] powerUps;
+    public PowerUpTrack[] powerUps;
 
     int curLevel = 1;
 
@@ -27,6 +39,11 @@ public class PlayerInfo : MonoBehaviour
         else if (instance != this)
         {
             instance = this;
+        }
+
+        foreach (var powerUpTrack in powerUps)
+        {
+            powerUpTrack.weaponStats.currentProfile = 0;
         }
     }
 
@@ -56,6 +73,8 @@ public class PlayerInfo : MonoBehaviour
 
     public void DamagePlayer(float amount)
     {
+        AudioManager.PlayerTakesDamage();
+        OnPlayerTakesDamage?.Invoke(amount);
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
@@ -87,14 +106,17 @@ public class PlayerInfo : MonoBehaviour
         curLevel += 1;
         UIController.instance.lvlText.text = curLevel.ToString();
 
-        // Enable a random power up
-        List<GameObject> availablePowerUps = new List<GameObject> ();
-        foreach (GameObject go in powerUps) {
-            if (!go.activeSelf)
-                availablePowerUps.Add(go);
+        // Enable random power ups
+        var powerUpsToSpawn = powerUps
+            .OrderBy(x => Random.Range(0f, 1f))
+            .Where(x => !x.weapon.activeInHierarchy || x.weaponStats.currentProfile < x.weaponStats.profiles.Count() - 1)
+            .Take(2);
+        foreach (var powerUpTrack in powerUpsToSpawn)
+        {
+            var point = Random.insideUnitCircle * 4;
+            var powerup = Instantiate(powerUpTrack.prefab, new Vector3(point.x, point.y, 0), Quaternion.identity).GetComponent<PowerUp>();
+            powerup.Init(powerUpTrack.icon, powerUpTrack.weapon, powerUpTrack.weaponStats);
         }
-        if (availablePowerUps.Count > 0)
-            availablePowerUps[Random.Range(0, availablePowerUps.Count)].SetActive(true);
     }
 
     public void AddWood(int amount)

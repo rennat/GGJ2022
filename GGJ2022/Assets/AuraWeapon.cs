@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class AuraWeapon : MonoBehaviour
 {
-    public GameObject aura;
-    public float rotateSpeed = 2f;
-    public float radius = 1f;
-    public float cooldown = 1f;
+    public WeaponStats weaponStats;
+    public float rotateSpeed => weaponStats.WeaponSpeed;
+    public float radius => weaponStats.WeaponSize;
+    public float cooldown => weaponStats.Cooldown;
     bool attacking = true;
+
+    public Transform rangePreview;
 
     private void Start() {
         StartCoroutine(attackCoroutine());
@@ -18,6 +20,7 @@ public class AuraWeapon : MonoBehaviour
     void Update()
     {
         transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
+        rangePreview.localScale = Vector3.one * radius * 2f;
     }
 
     IEnumerator attackCoroutine() {
