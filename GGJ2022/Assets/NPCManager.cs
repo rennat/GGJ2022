@@ -149,7 +149,7 @@ public class NPCManager : MonoBehaviour
             if (openUmbrella != null)
                 openUmbrella.SetActive(true);
             Disarm();
-            Destroy(projectile.gameObject);
+            projectile.Collided(this);
 
             if (PlayerInfo.instance != null)
                 PlayerInfo.instance.GainXP();

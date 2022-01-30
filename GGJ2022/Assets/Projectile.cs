@@ -6,6 +6,8 @@ public class Projectile : MonoBehaviour {
     public float damage = 10f;
     public float speed = 0.5f;
     public float lifespan = 3f;
+    public float aoeRadius = -1f;
+    public int aoeLimit = 0;
     public bool heatSeeking = false;
     GameObject target = null;
     Vector3 originalTargetPos = Vector3.zero;
@@ -38,5 +40,28 @@ public class Projectile : MonoBehaviour {
         this.target = target;
         originPos = transform.position;
         originalTargetPos = target.transform.position;
+    }
+
+    public void Collided(NPCManager npc) {
+        if (aoeRadius > 0f && aoeLimit > 0) {
+            Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(npc.transform.position, aoeRadius);
+
+            int aoeReach = 0;
+            foreach (Collider2D col in enemiesInRange) {
+                if (col.tag == "Enemy") {
+                    NPCManager closeNPC = col.GetComponent<NPCManager>();
+                    if (closeNPC.mode == "flee" || closeNPC == null)
+                        continue;
+
+                    if (closeNPC.openUmbrella != null)
+                        closeNPC.openUmbrella.SetActive(true);
+                    closeNPC.Disarm();
+                    aoeReach += 1;
+                    if (aoeReach >= aoeLimit)
+                        break;
+                }
+            }
+        }
+        Destroy(gameObject);
     }
 }
