@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerInfo : MonoBehaviour
 {
     public static PlayerInfo instance;
+    public delegate void PlayerTakesDamageDelegate(float amount);
+    public static PlayerTakesDamageDelegate OnPlayerTakesDamage;
 
     public float playerMineSpeed = 1f;
     public float currentHealth;
@@ -56,6 +58,8 @@ public class PlayerInfo : MonoBehaviour
 
     public void DamagePlayer(float amount)
     {
+        AudioManager.PlayerTakesDamage();
+        OnPlayerTakesDamage?.Invoke(amount);
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
