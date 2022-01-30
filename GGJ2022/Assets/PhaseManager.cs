@@ -115,6 +115,8 @@ public class PhaseManager : MonoBehaviour
                 curPhaseTime += tickTime + Time.deltaTime;
                 yield return new WaitForSeconds(tickTime);
             }
+
+            destroyNPCs();
         }
         yield return null;
     }
@@ -171,6 +173,12 @@ public class PhaseManager : MonoBehaviour
     void convertNPCs() {
         foreach (NPCManager liveNPC in GetComponentsInChildren<NPCManager> ()) {
             liveNPC.Convert();
+        }
+    }
+
+    void destroyNPCs() {
+        foreach (NPCManager liveNPC in GetComponentsInChildren<NPCManager> ()) {
+            liveNPC.Disarm();
         }
     }
 }
