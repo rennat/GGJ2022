@@ -87,6 +87,7 @@ public class PhaseManager : MonoBehaviour
             CurPhase = Phase.Prepare;
             updateUI(curDay, CurPhase);
             rainEffect.SetActive(false);
+            TreeSpawner.SpawnNewTrees();
 
             DayDefinition thisDay = dayConfig[i];
             float curPhaseTime = 0f;
