@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
-public class NPCManager : MonoBehaviour, IPointerClickHandler
+public class NPCManager : MonoBehaviour
 {
     public float totalHealth = 100f;
     public float speed = 0.1f;
@@ -13,6 +13,7 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
     public float playerDamage = 2f;
     public string mode = "wander";
     public float wanderRadius = 0.5f;
+    public GameObject openUmbrella;
     float curHealth;
     float curCoreDamage;
     float curPlayerDamage;
@@ -145,6 +146,8 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
                 StartCoroutine(DoCoreDamageCoroutine(col.GetComponent<CoreManager>()));
         } else if (col.tag == "Projectile") {
             Projectile projectile = col.GetComponent<Projectile>();
+            if (openUmbrella != null)
+                openUmbrella.SetActive(true);
             Disarm();
             Destroy(projectile.gameObject);
 
@@ -171,9 +174,5 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
             core.TakeDamage(curCoreDamage);
             yield return new WaitForSeconds(coreDamageTick);
         }
-    }
-
-    public void OnPointerClick(PointerEventData eventData) {
-        Disarm();
     }
 }
