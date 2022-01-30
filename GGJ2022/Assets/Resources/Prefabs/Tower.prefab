@@ -52,6 +52,7 @@ MonoBehaviour:
   cost: 50
   weapon: {fileID: 2410334940784960475}
   towerSprite: {fileID: 7492668283723385600}
+  towerCollider: {fileID: 0}
 --- !u!1 &2356775537689848229
 GameObject:
   m_ObjectHideFlags: 0
