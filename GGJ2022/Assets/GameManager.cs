@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     public static void EndGame() {
         gameState = GameState.Ended;
+        AudioManager.GameOverManGameOver();
 
         // Display game over screen
         instance.gameOverPanel.SetActive(true);

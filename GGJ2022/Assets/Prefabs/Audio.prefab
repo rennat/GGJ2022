@@ -308,3 +308,6 @@ MonoBehaviour:
   enemyTakesDamage: {fileID: 8300000, guid: f7c555902caa38a45ae0792e61223b06, type: 3}
   enemyDisarmed: {fileID: 8300000, guid: 68e35de993d96ac409176d03b7889f30, type: 3}
   powerUpPickedUp: {fileID: 8300000, guid: ad703abfb82e4a5478307268a23123c8, type: 3}
+  buildSound: {fileID: 8300000, guid: 2604c020d409bb34680a01de4795c4c3, type: 3}
+  chop: {fileID: 8300000, guid: d9466f32d179d094fa2d3aa4a590feae, type: 3}
+  gameOver: {fileID: 8300000, guid: 3d2732bb9fb026340a6d7deb90b18af2, type: 3}
