@@ -44,6 +44,12 @@ public class PowerUp : MonoBehaviour
             {
                 weaponStatsToUpgrade.Upgrade();
             }
+
+            foreach (PowerUp power in GameObject.FindObjectsOfType<PowerUp>()) {
+                if (power != this)
+                    Destroy(power.gameObject);
+            }
+
             Destroy(gameObject);
         }
     }

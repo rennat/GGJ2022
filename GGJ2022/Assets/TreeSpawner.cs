@@ -14,10 +14,7 @@ public class TreeSpawner : MonoBehaviour
 
     private void Awake() {
         instance = this;
-    }
 
-    // Start is called before the first frame update
-    void Start() {
         tileWorldLocations = new List<Vector3>();
         foreach (var pos in tilemap.cellBounds.allPositionsWithin) {
             Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
