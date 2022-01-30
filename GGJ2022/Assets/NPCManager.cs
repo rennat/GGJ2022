@@ -68,15 +68,18 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
         curCoreDamage = 0f;
         curPlayerDamage = 0f;
 
+        Destroy(GetComponent<Collider2D>());
+        Destroy(GetComponent<Rigidbody2D>());
+        Destroy(GetComponent<NavMeshAgent>());
+
         // Pick a target point
         Vector2 target = UnityEngine.Random.insideUnitCircle.normalized * 9f;
-        agent.SetDestination(target);
 
         float deathTimout = 10f;
         float curFleeTime = 0f;
         while (Vector2.Distance(transform.position, target) > 0.1f && curFleeTime < deathTimout) {
             curFleeTime += Time.deltaTime;
-            //transform.position = Vector2.Lerp(transform.position, target, Time.deltaTime * 1f);
+            transform.position = Vector2.Lerp(transform.position, target, Time.deltaTime * 3f);
             yield return null;
         }
         Die();
@@ -108,7 +111,8 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
     }
 
     public void Die() {
-        agent.isStopped = true;
+        if (agent != null)
+            agent.isStopped = true;
         damagingCore = false;
         StopAllCoroutines();
 
