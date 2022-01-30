@@ -9,10 +9,13 @@ public class AutoAttackWeapon : MonoBehaviour {
     public Projectile projectile;
     public Transform rangePreview;
 
+    private AudioSource audioSource;
+
     bool attacking = false;
 
     private void Start() {
         AttackMode();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -38,6 +41,10 @@ public class AutoAttackWeapon : MonoBehaviour {
                 // Attack
                 if (closestEnemy != null)
                 {
+                    if (audioSource != null)
+                    {
+                        audioSource.PlayOneShot(audioSource.clip, audioSource.volume);
+                    }
                     GameObject go = Instantiate(projectile.gameObject);
                     go.transform.position = transform.position;
                     go.GetComponent<Projectile>().SetTarget(closestEnemy);

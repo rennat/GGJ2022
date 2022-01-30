@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
     public WeaponStats weaponStats;
+    public GameObject impactPrefab;
     public float damage => weaponStats.ProjectileDamage;
     public float speed => weaponStats.ProjectileSpeed;
     public float lifespan => weaponStats.ProjectileLifespan;
@@ -64,5 +65,13 @@ public class Projectile : MonoBehaviour {
             }
         }
         Destroy(gameObject);
+    }
+
+    public void OnDestroy()
+    {
+        if (impactPrefab != null)
+        {
+            Instantiate(impactPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

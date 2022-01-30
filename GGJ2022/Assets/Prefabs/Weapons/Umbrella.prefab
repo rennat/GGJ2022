@@ -47,12 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponStats: {fileID: 11400000, guid: 4790a27cffd54a1418fa79fc8f73a420, type: 2}
-  damage: 10
-  speed: 4
-  lifespan: 5
-  aoeRadius: -1
-  aoeLimit: 0
-  heatSeeking: 0
 --- !u!58 &2140700506649008320
 CircleCollider2D:
   m_ObjectHideFlags: 0
