@@ -109,7 +109,7 @@ public class PlayerInfo : MonoBehaviour
         // Enable random power ups
         var powerUpsToSpawn = powerUps
             .OrderBy(x => Random.Range(0f, 1f))
-            .Where(x => !x.weapon.activeInHierarchy || x.weaponStats.currentProfile < x.weaponStats.profiles.Count() - 1)
+            .Where(x => (x.weapon != null && !x.weapon.activeInHierarchy) || x.weaponStats.currentProfile < x.weaponStats.profiles.Count() - 1)
             .Take(2);
         foreach (var powerUpTrack in powerUpsToSpawn)
         {

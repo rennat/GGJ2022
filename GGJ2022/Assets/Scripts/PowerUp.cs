@@ -40,7 +40,7 @@ public class PowerUp : MonoBehaviour
             {
                 weaponToEnable.SetActive(true);
             }
-            else
+            else if (weaponStatsToUpgrade != null)
             {
                 weaponStatsToUpgrade.Upgrade();
             }
