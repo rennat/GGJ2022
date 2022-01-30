@@ -94,7 +94,6 @@ public class PhaseManager : MonoBehaviour
             curPhaseTime = 0f;
             CurPhase = Phase.Survive;
             updateUI(curDay, CurPhase);
-            convertNPCs();
 
             StartCoroutine(SpawnRushNPCs(thisDay.phase2NPCCount, thisDay.phase2Duration, thisDay.phase2NPCType));
             while (curPhaseTime < dayConfig[i].phase2Duration) {
@@ -116,8 +115,8 @@ public class PhaseManager : MonoBehaviour
             // Pick a random spawn point
             GameObject curSpawn = wanderSpawnPoints[UnityEngine.Random.Range(0, wanderSpawnPoints.Length)];
             if (curSpawn != null) {
-                GameObject newNPC = Instantiate(npcType, this.transform);
-                newNPC.transform.position = curSpawn.transform.position + new Vector3(UnityEngine.Random.Range(-wanderSpawnRadius, wanderSpawnRadius), UnityEngine.Random.Range(-wanderSpawnRadius, wanderSpawnRadius));
+                var pos = curSpawn.transform.position + new Vector3(UnityEngine.Random.Range(-wanderSpawnRadius, wanderSpawnRadius), UnityEngine.Random.Range(-wanderSpawnRadius, wanderSpawnRadius));
+                GameObject newNPC = Instantiate(npcType, pos, Quaternion.identity, this.transform);
             }
             yield return null;
         }
@@ -130,8 +129,7 @@ public class PhaseManager : MonoBehaviour
             // Pick a random spawn point
             GameObject curSpawn = rushSpawnPoints[UnityEngine.Random.Range(0, rushSpawnPoints.Length)];
             if (curSpawn != null) {
-                GameObject newNPC = Instantiate(npcType, this.transform);
-                newNPC.transform.position = curSpawn.transform.position;
+                GameObject newNPC = Instantiate(npcType, curSpawn.transform.position, Quaternion.identity, this.transform);
             }
             yield return new WaitForSeconds(waitTime);
         }
@@ -157,12 +155,6 @@ public class PhaseManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(time - minutes * 60f);
         string niceTime = string.Format("{0:00}:{1:00}", minutes, seconds);
         modeTimer.text = niceTime;
-    }
-
-    void convertNPCs() {
-        foreach (NPCManager liveNPC in GetComponentsInChildren<NPCManager> ()) {
-            liveNPC.Convert();
-        }
     }
 
     void destroyNPCs() {

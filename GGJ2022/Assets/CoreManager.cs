@@ -6,14 +6,20 @@ using TMPro;
 public class CoreManager : MonoBehaviour
 {
     public float totalHealth = 500f;
-    public TMP_Text healthText;
 
     float curHealth;
     bool dead = false;
 
     private void Start() {
         curHealth = totalHealth;
-        healthText.text = curHealth.ToString();
+        UIController.instance.coreHealthSlider.maxValue = totalHealth;
+        UpdateHealthUI();
+    }
+
+    public void UpdateHealthUI()
+    {
+        UIController.instance.coreHealthSlider.value = curHealth;
+        UIController.instance.coreHealthText.text = curHealth.ToString() + " / " + totalHealth.ToString();
     }
 
     public void TakeDamage(float damage) {
@@ -22,7 +28,7 @@ public class CoreManager : MonoBehaviour
             return;
 
         curHealth = Mathf.Max(curHealth - damage, 0f);
-        healthText.text = curHealth.ToString();
+        UpdateHealthUI();
 
         if (curHealth <= 0f) {
             Die();
