@@ -11,12 +11,16 @@ public class GridBuildingSystem : MonoBehaviour
     public GridLayout gridLayout;
     public Tilemap MainTilemap;
     public Tilemap TempTilemap;
+    public GameObject wrenchIcon;
 
     private static Dictionary<TileType, TileBase> tileBases = new Dictionary<TileType, TileBase>();
 
-    private Building temp;
+    public Building temp;
     private Vector3 prevPos;
     private BoundsInt prevArea;
+
+    public bool tempToggleEnabled = true;
+    public bool isBuilding = false;
 
     #region Unity Methods
 
@@ -48,7 +52,7 @@ public class GridBuildingSystem : MonoBehaviour
                 return;
             }
 
-            if(!temp.Placed)
+            if(!temp.Placed && !isBuilding)
             {
                 Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int cellPos = gridLayout.LocalToCell(touchPos);
@@ -61,17 +65,21 @@ public class GridBuildingSystem : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Space) && temp)
         {
-            if (temp.CanBePlaced())
+            if (temp.CanBePlaced() && PlayerInfo.instance.wood >= temp.cost)
             {
-                temp.Place();
+                StartCoroutine(BuildBuilding(3f, temp.cost));
+            }
+            else if (PlayerInfo.instance.wood < temp.cost)
+            {
+                Debug.Log("You need more wood!");
             }
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             ClearArea();
-            Destroy(temp.gameObject);
+            temp.gameObject.SetActive(false);
         }
     }
 
@@ -114,13 +122,30 @@ public class GridBuildingSystem : MonoBehaviour
 
     #region Building Placement
 
+    public void ToggleTemp()
+    {
+        if (temp)
+        {
+            temp.gameObject.SetActive(!temp.gameObject.activeInHierarchy);
+            temp.gameObject.transform.position = (new Vector3(1000, 1000, 1));
+        }
+    }
+
     public void InitializeWithBuilding(GameObject building)
     {
-        temp = Instantiate(building, new Vector3(1000, 1000, 1), Quaternion.identity).GetComponent<Building>();
-        FollowBuilding();
+        ClearArea();
+        if (!temp)
+        {
+            temp = Instantiate(building, new Vector3(1000, 1000, 1), Quaternion.identity).GetComponent<Building>();
+            FollowBuilding();
+        } else if (temp.Placed)
+        {
+            temp = Instantiate(building, new Vector3(1000, 1000, 1), Quaternion.identity).GetComponent<Building>();
+            FollowBuilding();
+        }
     }
     
-    private void ClearArea()
+    public void ClearArea()
     {
         TileBase[] toClear = new TileBase[prevArea.size.x * prevArea.size.y * prevArea.size.z];
         FillTiles(toClear, TileType.Empty);
@@ -175,6 +200,31 @@ public class GridBuildingSystem : MonoBehaviour
     {
         SetTilesBlock(area, TileType.Empty, TempTilemap);
         SetTilesBlock(area, TileType.Green, MainTilemap);
+    }
+
+    IEnumerator BuildBuilding(float buildTime, int woodCost)
+    {
+        tempToggleEnabled = false;
+        PlayerController.instance.ToggleBuildMode();
+        isBuilding = true;
+        PlayerInfo.instance.SubtractWood(woodCost);
+        GameObject wrench = Instantiate(wrenchIcon, new Vector3(temp.transform.position.x, temp.transform.position.y, temp.transform.position.z), Quaternion.identity);
+        var col = temp.GetComponentInChildren<SpriteRenderer>().color;
+        float currentTime = 0f;
+        while (currentTime < buildTime)
+        {
+            currentTime += Time.deltaTime;
+            col.a = currentTime / buildTime;
+            temp.GetComponentInChildren<SpriteRenderer>().color = col;
+            yield return null;
+        }
+        yield return null;
+        temp.Place();
+        isBuilding = false;
+        temp = Instantiate(temp, new Vector3(1000, 1000, 1), Quaternion.identity).GetComponent<Building>();
+        Destroy(wrench);
+        temp.gameObject.SetActive(false);
+        tempToggleEnabled = true;
     }
 
     #endregion

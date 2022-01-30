@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tree
+  - Building
   - Core
   - Enemy
   - Projectile
@@ -47,6 +48,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Buildings
+    uniqueID: 2164481861
     locked: 0
   - name: Player
     uniqueID: 3347689417
