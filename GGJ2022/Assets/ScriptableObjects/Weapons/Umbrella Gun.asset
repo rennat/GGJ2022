@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentProfile: 0
   profiles:
-  - range: 2
+  - range: 4
     rateOfFire: 1
     projectileDamage: 10
     projectileSpeed: 4
@@ -26,7 +26,7 @@ MonoBehaviour:
     weaponSize: 0
     weaponSpeed: 0
     cooldown: 0
-  - range: 2
+  - range: 4
     rateOfFire: 1.2
     projectileDamage: 10
     projectileSpeed: 4
@@ -38,7 +38,7 @@ MonoBehaviour:
     weaponSize: 0
     weaponSpeed: 0
     cooldown: 0
-  - range: 2
+  - range: 4
     rateOfFire: 1.2
     projectileDamage: 10
     projectileSpeed: 4.8
@@ -50,7 +50,7 @@ MonoBehaviour:
     weaponSize: 0
     weaponSpeed: 0
     cooldown: 0
-  - range: 2
+  - range: 4
     rateOfFire: 1.4
     projectileDamage: 10
     projectileSpeed: 4.8
@@ -62,7 +62,7 @@ MonoBehaviour:
     weaponSize: 0
     weaponSpeed: 0
     cooldown: 0
-  - range: 2
+  - range: 4
     rateOfFire: 1.4
     projectileDamage: 10
     projectileSpeed: 5.6
@@ -74,7 +74,7 @@ MonoBehaviour:
     weaponSize: 0
     weaponSpeed: 0
     cooldown: 0
-  - range: 2
+  - range: 4
     rateOfFire: 1.4
     projectileDamage: 10
     projectileSpeed: 5.6
