@@ -137,13 +137,11 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
                 StartCoroutine(DoCoreDamageCoroutine(col.GetComponent<CoreManager>()));
         } else if (col.tag == "Projectile") {
             Projectile projectile = col.GetComponent<Projectile>();
-            if (mode == "wander")
-                Disarm();
-            else if (mode == "rush") {
-                //TakeDamage(projectile.damage);
-                Disarm();
-            }
+            Disarm();
             Destroy(projectile.gameObject);
+
+            if (PlayerInfo.instance != null)
+                PlayerInfo.instance.GainXP();
         } else if (col.tag == "Player") {
             if (PlayerInfo.instance != null)
                 PlayerInfo.instance.DamagePlayer(curPlayerDamage);
