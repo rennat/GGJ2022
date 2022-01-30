@@ -13,6 +13,7 @@ public class PlayerInfo : MonoBehaviour
     public int wood = 0;
     public float levelBaseXP = 500f;
     public float levelXPMultiplier = 1.2f;
+    public GameObject[] powerUps;
 
     int curLevel = 1;
 
@@ -73,14 +74,27 @@ public class PlayerInfo : MonoBehaviour
 
         // Level up
         if (currentXP >= getNextLevelXP()) {
-            levelBaseXP = getNextLevelXP();
-            currentXP = 0f;
-            curLevel += 1;
-            UIController.instance.lvlText.text = curLevel.ToString();
+            LevelUp();
         }
 
         UIController.instance.xpSlider.value = currentXP;
         UIController.instance.xpText.text = currentXP.ToString() + " / " + getNextLevelXP().ToString();
+    }
+
+    void LevelUp() {
+        levelBaseXP = getNextLevelXP();
+        currentXP = 0f;
+        curLevel += 1;
+        UIController.instance.lvlText.text = curLevel.ToString();
+
+        // Enable a random power up
+        List<GameObject> availablePowerUps = new List<GameObject> ();
+        foreach (GameObject go in powerUps) {
+            if (!go.activeSelf)
+                availablePowerUps.Add(go);
+        }
+        if (availablePowerUps.Count > 0)
+            availablePowerUps[Random.Range(0, availablePowerUps.Count)].SetActive(true);
     }
 
     public void AddWood(int amount)
