@@ -129,9 +129,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.09}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.36
+  m_Radius: 0.19
 --- !u!1 &4229544389325095182
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +205,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7877921557971618100, guid: 02027016afbc5d544ab92ba819bc8094, type: 3}
+  m_Sprite: {fileID: -2089507320, guid: 1b772d829580d8944b67c3ef7965513a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

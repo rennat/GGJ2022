@@ -25000,6 +25000,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6536805691201314868, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1257844736, guid: 5c473acd765ad9b48a4a10a18026ae60, type: 3}
+    - target: {fileID: 6536805692243951802, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536805692243951802, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.21
+      objectReference: {fileID: 0}
     - target: {fileID: 6536805692243951804, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
       propertyPath: gridManager
       value: 
@@ -25055,6 +25067,18 @@ PrefabInstance:
     - target: {fileID: 6536805692243951806, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
       propertyPath: m_Name
       value: JessePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536805692347768942, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.623
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536805692347768943, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536805692347768943, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -947277879
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
