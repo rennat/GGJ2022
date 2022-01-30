@@ -1403,10 +1403,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UmbrellaAura
       objectReference: {fileID: 0}
-    - target: {fileID: 2993957103793925393, guid: 8039bd06d79ab114ca7fd39286f0b2d9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2993957103793925394, guid: 8039bd06d79ab114ca7fd39286f0b2d9, type: 3}
       propertyPath: m_RootOrder
       value: 2
