@@ -94,7 +94,6 @@ public class PhaseManager : MonoBehaviour
             curPhaseTime = 0f;
             CurPhase = Phase.Survive;
             updateUI(curDay, CurPhase);
-            convertNPCs();
 
             StartCoroutine(SpawnRushNPCs(thisDay.phase2NPCCount, thisDay.phase2Duration, thisDay.phase2NPCType));
             while (curPhaseTime < dayConfig[i].phase2Duration) {
@@ -157,12 +156,6 @@ public class PhaseManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(time - minutes * 60f);
         string niceTime = string.Format("{0:00}:{1:00}", minutes, seconds);
         modeTimer.text = niceTime;
-    }
-
-    void convertNPCs() {
-        foreach (NPCManager liveNPC in GetComponentsInChildren<NPCManager> ()) {
-            liveNPC.Convert();
-        }
     }
 
     void destroyNPCs() {

@@ -274,6 +274,8 @@ MonoBehaviour:
   mode: rush
   wanderRadius: 0.5
   openUmbrella: {fileID: 2358655895004560616}
+  HappyCatPrefab: {fileID: 1299587937744100599, guid: fd50d480125e3c04eb07b20cfcdc9abc, type: 3}
+  AngryCatPrefab: {fileID: 7185346516580382019}
 --- !u!50 &-5121980904728593087
 Rigidbody2D:
   serializedVersion: 4

@@ -14,6 +14,10 @@ public class NPCManager : MonoBehaviour
     public string mode = "wander";
     public float wanderRadius = 0.5f;
     public GameObject openUmbrella;
+
+    public GameObject HappyCatPrefab;
+    public GameObject AngryCatPrefab;
+
     float curHealth;
     float curCoreDamage;
     float curPlayerDamage;
@@ -33,6 +37,16 @@ public class NPCManager : MonoBehaviour
             StartCoroutine(WanderCoroutine()); 
         else if (mode == "rush")
             StartCoroutine(MoveCoroutine());
+    }
+
+    private void OnEnable()
+    {
+        PhaseManager.OnPhaseChange += HandlePhaseChange;
+    }
+
+    private void OnDisable()
+    {
+        PhaseManager.OnPhaseChange -= HandlePhaseChange;
     }
 
     IEnumerator MoveCoroutine() {
@@ -91,12 +105,21 @@ public class NPCManager : MonoBehaviour
         yield return null;
     }
 
-    public void Convert() {
-        if (mode == "wander") {
-            StopAllCoroutines();
-            mode = "rush";
-            StartCoroutine(MoveCoroutine());
+    public void HandlePhaseChange(PhaseManager.Phase phase)
+    {
+        StopAllCoroutines();
+        switch (phase)
+        {
+            case PhaseManager.Phase.Survive:
+                Instantiate(AngryCatPrefab, transform.position, transform.rotation, transform.parent);
+                break;
+            case PhaseManager.Phase.Default:
+            case PhaseManager.Phase.Prepare:
+            default:
+                Instantiate(HappyCatPrefab, transform.position, transform.rotation, transform.parent);
+                break;
         }
+        Destroy(gameObject);
     }
 
     public void Disarm() {
