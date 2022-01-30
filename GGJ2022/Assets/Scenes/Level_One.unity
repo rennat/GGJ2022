@@ -2087,7 +2087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6521535096645085665, guid: 34ceb6e51c27bb848884e43307769c05, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6521535097693047121, guid: 34ceb6e51c27bb848884e43307769c05, type: 3}
       propertyPath: m_Tiles.Array.size
