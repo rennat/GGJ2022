@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5588193762502150034}
   - component: {fileID: 2091080046704093600}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemies_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: -1670326068637519554}
   - component: {fileID: -4933493142299730116}
   - component: {fileID: -487495086789198521}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LilCat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -136,6 +136,7 @@ MonoBehaviour:
   speed: 0.1
   coreDamage: 10
   coreDamageTick: 1
+  playerDamage: 2
   mode: wander
   wanderRadius: 0.5
 --- !u!50 &-1670326068637519554

@@ -90,5 +90,9 @@ public class PlayerController : MonoBehaviour
             collision.GetComponent<HarvestScript>().Chopped();
             collision.GetComponent<HarvestScript>().Harvesting();
         }
+        if (collision.tag == "EnemyCollider")
+        {
+            Debug.Log("OUCH!");
+        }
     }
 }
