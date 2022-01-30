@@ -115,8 +115,8 @@ public class PhaseManager : MonoBehaviour
             // Pick a random spawn point
             GameObject curSpawn = wanderSpawnPoints[UnityEngine.Random.Range(0, wanderSpawnPoints.Length)];
             if (curSpawn != null) {
-                GameObject newNPC = Instantiate(npcType, this.transform);
-                newNPC.transform.position = curSpawn.transform.position + new Vector3(UnityEngine.Random.Range(-wanderSpawnRadius, wanderSpawnRadius), UnityEngine.Random.Range(-wanderSpawnRadius, wanderSpawnRadius));
+                var pos = curSpawn.transform.position + new Vector3(UnityEngine.Random.Range(-wanderSpawnRadius, wanderSpawnRadius), UnityEngine.Random.Range(-wanderSpawnRadius, wanderSpawnRadius));
+                GameObject newNPC = Instantiate(npcType, pos, Quaternion.identity, this.transform);
             }
             yield return null;
         }
@@ -129,8 +129,7 @@ public class PhaseManager : MonoBehaviour
             // Pick a random spawn point
             GameObject curSpawn = rushSpawnPoints[UnityEngine.Random.Range(0, rushSpawnPoints.Length)];
             if (curSpawn != null) {
-                GameObject newNPC = Instantiate(npcType, this.transform);
-                newNPC.transform.position = curSpawn.transform.position;
+                GameObject newNPC = Instantiate(npcType, curSpawn.transform.position, Quaternion.identity, this.transform);
             }
             yield return new WaitForSeconds(waitTime);
         }

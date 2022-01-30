@@ -8,6 +8,8 @@ public class UIController : MonoBehaviour
 {
     public static UIController instance;
 
+    public Slider coreHealthSlider;
+    public TMP_Text coreHealthText;
     public Slider healthSlider;
     public TMP_Text healthText;
     public Slider xpSlider;
