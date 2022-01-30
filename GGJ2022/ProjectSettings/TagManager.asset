@@ -54,9 +54,9 @@ TagManager:
   - name: Grid
     uniqueID: 1119982277
     locked: 0
-  - name: Buildings
-    uniqueID: 2164481861
-    locked: 0
   - name: Player
     uniqueID: 3347689417
+    locked: 0
+  - name: Buildings
+    uniqueID: 2164481861
     locked: 0
