@@ -20,7 +20,6 @@ public class PowerUp : MonoBehaviour
     {
         if (Time.time - birthtime > lifespan)
         {
-            Debug.Log("PowerUp Expired");
             Destroy(gameObject);
         }
     }

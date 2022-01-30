@@ -111,7 +111,6 @@ public class PlayerInfo : MonoBehaviour
             .OrderBy(x => Random.Range(0f, 1f))
             .Where(x => !x.weapon.activeInHierarchy || x.weaponStats.currentProfile < x.weaponStats.profiles.Count() - 1)
             .Take(2);
-        Debug.Log($"Spawning {powerUpsToSpawn.Count()} powerups");
         foreach (var powerUpTrack in powerUpsToSpawn)
         {
             var point = Random.insideUnitCircle * 4;
