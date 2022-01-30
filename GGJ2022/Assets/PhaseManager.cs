@@ -3,13 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class PhaseManager : MonoBehaviour
 {
+    public enum Phase
+    {
+        Default,
+        Prepare,
+        Survive
+    }
+
+    private static PhaseManager _instance;
+    public static Phase CurrentPhase => (Phase)_instance.CurPhase;
+
+
     public GameObject[] wanderSpawnPoints;
     public GameObject[] rushSpawnPoints;
     public int curDay = 0;
-    public int curPhase = 0;
     public float tickTime = 1f;
     public float wanderSpawnRadius = 0.3f;
 
@@ -17,6 +28,31 @@ public class PhaseManager : MonoBehaviour
     public TMP_Text phaseLabel;
     public TMP_Text modeLabel;
     public TMP_Text modeTimer;
+
+    public UnityEvent OnStartPrepare;
+    public UnityEvent OnStartSurvive;
+
+    private Phase curPhase = Phase.Default;
+    public Phase CurPhase
+    {
+        get => curPhase;
+        set
+        {
+            if (curPhase != value)
+            {
+                curPhase = value;
+                switch (curPhase)
+                {
+                    case Phase.Prepare:
+                        OnStartPrepare.Invoke();
+                        break;
+                    case Phase.Survive:
+                        OnStartSurvive.Invoke();
+                        break;
+                }
+            }
+        }
+    }
 
     [Serializable]
     public struct DayDefinition {
@@ -31,6 +67,15 @@ public class PhaseManager : MonoBehaviour
 
     public DayDefinition[] dayConfig;
 
+    private void Awake()
+    {
+        if (_instance != null)
+        {
+            Debug.LogError("Why u do dis? There should be only one Phase Manager");
+        }
+        _instance = this;
+    }
+
     // Start is called before the first frame update
     void Start() {
         StartCoroutine(dayLoop());
@@ -39,8 +84,8 @@ public class PhaseManager : MonoBehaviour
     IEnumerator dayLoop () {
         for (int i = 0; i < dayConfig.Length; i++) {
             curDay = i+1;
-            curPhase = 1;
-            updateUI(curDay, curPhase);
+            CurPhase = Phase.Prepare;
+            updateUI(curDay, CurPhase);
 
             DayDefinition thisDay = dayConfig[i];
             float curPhaseTime = 0f;
@@ -56,8 +101,8 @@ public class PhaseManager : MonoBehaviour
             }
 
             curPhaseTime = 0f;
-            curPhase = 2;
-            updateUI(curDay, curPhase);
+            CurPhase = Phase.Survive;
+            updateUI(curDay, CurPhase);
 
             convertNPCs();
 
@@ -105,11 +150,11 @@ public class PhaseManager : MonoBehaviour
         return false;
     }
 
-    void updateUI(int day, int phase) {
+    void updateUI(int day, Phase phase) {
         dayLabel.text = day.ToString();
         phaseLabel.text = phase.ToString();
 
-        if (phase == 1) {
+        if (phase == Phase.Prepare) {
             modeLabel.text = "Prepare";
         } else {
             modeLabel.text = "Survive";
