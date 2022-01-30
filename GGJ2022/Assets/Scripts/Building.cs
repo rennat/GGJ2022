@@ -10,11 +10,14 @@ public class Building : MonoBehaviour
 
     public GameObject weapon;
     public SpriteRenderer towerSprite;
+    public BoxCollider2D towerCollider;
 
     // Start is called before the first frame update
     void Start()
     {
         weapon.gameObject.SetActive(false);
+        towerCollider = GetComponentInChildren<BoxCollider2D>();
+        towerCollider.enabled = false;
     }
 
     #region Build Methods
@@ -42,6 +45,7 @@ public class Building : MonoBehaviour
         GridBuildingSystem.current.TakeArea(areaTemp);
         weapon.gameObject.SetActive(true);
         towerSprite.sortingOrder = -(int)Mathf.Round(gameObject.transform.position.y);
+        towerCollider.enabled = true;
     }
 
     #endregion

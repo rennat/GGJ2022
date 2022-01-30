@@ -12,6 +12,8 @@ public class GridBuildingSystem : MonoBehaviour
     public Tilemap MainTilemap;
     public Tilemap TempTilemap;
     public GameObject wrenchIcon;
+    public GameObject spacebarIcon;
+    public GameObject woodText;
 
     private static Dictionary<TileType, TileBase> tileBases = new Dictionary<TileType, TileBase>();
 
@@ -73,13 +75,22 @@ public class GridBuildingSystem : MonoBehaviour
             }
             else if (PlayerInfo.instance.wood < temp.cost)
             {
-                Debug.Log("You need more wood!");
+                StartCoroutine(WoodTextDisplay());
             }
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && PlayerController.instance.buildModeEnabled)
         {
             ClearArea();
             temp.gameObject.SetActive(false);
+        }
+        
+        if (temp.CanBePlaced() && PlayerInfo.instance.wood >= temp.cost)
+        {
+            spacebarIcon.SetActive(true);
+        } 
+        else
+        {
+            spacebarIcon.SetActive(false);
         }
     }
 
@@ -226,6 +237,17 @@ public class GridBuildingSystem : MonoBehaviour
         Destroy(wrench);
         temp.gameObject.SetActive(false);
         tempToggleEnabled = true;
+    }
+
+    IEnumerator WoodTextDisplay()
+    {
+        woodText.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        woodText.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        woodText.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        woodText.SetActive(false);
     }
 
     #endregion
