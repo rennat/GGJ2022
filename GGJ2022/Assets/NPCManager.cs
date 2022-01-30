@@ -77,7 +77,7 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
         GetComponentInChildren<SpriteRenderer>().color = new Color(baseColor.r, baseColor.g, baseColor.b, 0.25f);
 
         // Pick a target point
-        Vector2 target = UnityEngine.Random.insideUnitCircle.normalized * 9f;
+        Vector2 target = UnityEngine.Random.insideUnitCircle.normalized * 20f;
 
         float deathTimout = 10f;
         float curFleeTime = 0f;

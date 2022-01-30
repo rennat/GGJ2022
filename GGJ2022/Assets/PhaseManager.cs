@@ -23,9 +23,9 @@ public class PhaseManager : MonoBehaviour
     public int curDay = 0;
     public float tickTime = 1f;
     public float wanderSpawnRadius = 0.3f;
+    public GameObject rainEffect;
 
     public TMP_Text dayLabel;
-    public TMP_Text phaseLabel;
     public TMP_Text modeLabel;
     public TMP_Text modeTimer;
 
@@ -86,6 +86,7 @@ public class PhaseManager : MonoBehaviour
             curDay = i+1;
             CurPhase = Phase.Prepare;
             updateUI(curDay, CurPhase);
+            rainEffect.SetActive(false);
 
             DayDefinition thisDay = dayConfig[i];
             float curPhaseTime = 0f;
@@ -103,8 +104,8 @@ public class PhaseManager : MonoBehaviour
             curPhaseTime = 0f;
             CurPhase = Phase.Survive;
             updateUI(curDay, CurPhase);
-
             convertNPCs();
+            rainEffect.SetActive(true);
 
             StartCoroutine(SpawnRushNPCs(thisDay.phase2NPCCount, thisDay.phase2Duration, thisDay.phase2NPCType));
             while (curPhaseTime < dayConfig[i].phase2Duration) {
@@ -154,7 +155,6 @@ public class PhaseManager : MonoBehaviour
 
     void updateUI(int day, Phase phase) {
         dayLabel.text = day.ToString();
-        phaseLabel.text = phase.ToString();
 
         if (phase == Phase.Prepare) {
             modeLabel.text = "Prepare";
