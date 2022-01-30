@@ -8,10 +8,13 @@ public class Building : MonoBehaviour
     public BoundsInt area;
     public int cost;
 
+    public GameObject weapon;
+    public SpriteRenderer towerSprite;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        weapon.gameObject.SetActive(false);
     }
 
     #region Build Methods
@@ -37,6 +40,8 @@ public class Building : MonoBehaviour
         areaTemp.position = positionInt;
         Placed = true;
         GridBuildingSystem.current.TakeArea(areaTemp);
+        weapon.gameObject.SetActive(true);
+        towerSprite.sortingOrder = -(int)Mathf.Round(gameObject.transform.position.y);
     }
 
     #endregion

@@ -65,7 +65,7 @@ public class GridBuildingSystem : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && temp)
+        else if (Input.GetKeyDown(KeyCode.Space) && temp && PlayerController.instance.buildModeEnabled)
         {
             if (temp.CanBePlaced() && PlayerInfo.instance.wood >= temp.cost)
             {
@@ -76,7 +76,7 @@ public class GridBuildingSystem : MonoBehaviour
                 Debug.Log("You need more wood!");
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(KeyCode.Escape) && PlayerController.instance.buildModeEnabled)
         {
             ClearArea();
             temp.gameObject.SetActive(false);
