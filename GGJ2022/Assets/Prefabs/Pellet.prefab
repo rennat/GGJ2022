@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  speed: 2
+  speed: 4
   lifespan: 5
   heatSeeking: 0
 --- !u!58 &2140700506649008320

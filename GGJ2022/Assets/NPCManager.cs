@@ -72,6 +72,9 @@ public class NPCManager : MonoBehaviour, IPointerClickHandler
         Destroy(GetComponent<Rigidbody2D>());
         Destroy(GetComponent<NavMeshAgent>());
 
+        Color baseColor = GetComponentInChildren<SpriteRenderer>().color;
+        GetComponentInChildren<SpriteRenderer>().color = new Color(baseColor.r, baseColor.g, baseColor.b, 0.25f);
+
         // Pick a target point
         Vector2 target = UnityEngine.Random.insideUnitCircle.normalized * 9f;
 
