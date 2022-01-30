@@ -417,10 +417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1878e4b6aa8926942b6111e936f422da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStats: {fileID: 0}
   aura: {fileID: 0}
-  rotateSpeed: 50
-  radius: 1
-  cooldown: 1
 --- !u!1 &8263349247628796246
 GameObject:
   m_ObjectHideFlags: 0

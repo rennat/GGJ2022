@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AuraWeapon : MonoBehaviour
 {
-    public GameObject aura;
-    public float rotateSpeed = 2f;
-    public float radius = 1f;
-    public float cooldown = 1f;
+    public WeaponStats weaponStats;
+    public float rotateSpeed => weaponStats.WeaponSpeed;
+    public float radius => weaponStats.WeaponSize;
+    public float cooldown => weaponStats.Cooldown;
     bool attacking = true;
 
     private void Start() {
