@@ -61,11 +61,13 @@ public class PlayerController : MonoBehaviour
 
         if (buildModeEnabled)
         {
-            buildModeObject.gameObject.SetActive(true);
+            if (buildModeObject != null)
+                buildModeObject.gameObject.SetActive(true);
         }
         else
         {
-            buildModeObject.gameObject.SetActive(false);
+            if (buildModeObject != null)
+                buildModeObject.gameObject.SetActive(false);
         }
     }
 

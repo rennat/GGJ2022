@@ -10,6 +10,9 @@ public class UIController : MonoBehaviour
 
     public Slider healthSlider;
     public TMP_Text healthText;
+    public Slider xpSlider;
+    public TMP_Text xpText;
+    public TMP_Text lvlText;
     public TMP_Text woodText;
 
     // Start is called before the first frame update
