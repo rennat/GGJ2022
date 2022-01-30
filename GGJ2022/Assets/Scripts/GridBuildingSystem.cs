@@ -209,6 +209,7 @@ public class GridBuildingSystem : MonoBehaviour
         isBuilding = true;
         PlayerInfo.instance.SubtractWood(woodCost);
         GameObject wrench = Instantiate(wrenchIcon, new Vector3(temp.transform.position.x, temp.transform.position.y, temp.transform.position.z), Quaternion.identity);
+        AudioManager.BuildSound();
         var col = temp.GetComponentInChildren<SpriteRenderer>().color;
         float currentTime = 0f;
         while (currentTime < buildTime)
