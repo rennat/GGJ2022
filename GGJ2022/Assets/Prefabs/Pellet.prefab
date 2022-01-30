@@ -133,6 +133,7 @@ MonoBehaviour:
   damage: 10
   speed: 2
   lifespan: 5
+  heatSeeking: 0
 --- !u!58 &2140700506649008320
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -10232,6 +10232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PelletRifle
       objectReference: {fileID: 0}
+    - target: {fileID: 2993957103793925393, guid: f779eda692560664fb454ca18b006857, type: 3}
+      propertyPath: m_TagString
+      value: Projectile
+      objectReference: {fileID: 0}
     - target: {fileID: 2993957103793925394, guid: f779eda692560664fb454ca18b006857, type: 3}
       propertyPath: m_RootOrder
       value: 0
