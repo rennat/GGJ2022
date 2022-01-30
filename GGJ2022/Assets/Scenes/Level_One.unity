@@ -306,6 +306,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 492a4a28b3f46844292db29e6ee01ba6, type: 3}
+--- !u!1 &78373801 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2993957104811586201, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
+  m_PrefabInstance: {fileID: 1746875945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &196715230 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6521535096645085665, guid: 34ceb6e51c27bb848884e43307769c05, type: 3}
@@ -761,6 +766,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8125613505470688606, guid: 492a4a28b3f46844292db29e6ee01ba6, type: 3}
   m_PrefabInstance: {fileID: 1234650399}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &370061437 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2993957104535925869, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
+  m_PrefabInstance: {fileID: 1746875945}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &388981366
 GameObject:
@@ -25071,11 +25081,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2993957104535925870, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2993957104811586202, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5786373761667504094, guid: 95d808444555c3948a7d0b7175a97684, type: 3}
       propertyPath: m_SortingOrder
@@ -26862,8 +26872,8 @@ MonoBehaviour:
   levelXPMultiplier: 1.25
   powerUps:
   - {fileID: 1047238085}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 370061437}
+  - {fileID: 78373801}
 --- !u!4 &306718577609373950
 Transform:
   m_ObjectHideFlags: 0

@@ -129,6 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65160e9ceef3194bb2e720778e70e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoTick: 0.5
-  detectRadius: 2
+  weaponStats: {fileID: 11400000, guid: 4790a27cffd54a1418fa79fc8f73a420, type: 2}
   projectile: {fileID: 8743734097030580904, guid: d4c970840ed4f684e993a62b3dfcc404, type: 3}
+  rangePreview: {fileID: 2993957103720696424}

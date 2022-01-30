@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class AutoAttackWeapon : MonoBehaviour {
     public WeaponStats weaponStats;
-    public float autoTick => weaponStats.RateOfFire;
+    public float autoTick => 1/weaponStats.RateOfFire;
     public float detectRadius => weaponStats.Range;
     public Projectile projectile;
+    public Transform rangePreview;
 
     bool attacking = false;
 
     private void Start() {
         AttackMode();
+    }
+
+    private void Update()
+    {
+        rangePreview.localScale = Vector3.one * weaponStats.Range * 2;
     }
 
     public void AttackMode() {

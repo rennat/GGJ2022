@@ -10,6 +10,8 @@ public class AuraWeapon : MonoBehaviour
     public float cooldown => weaponStats.Cooldown;
     bool attacking = true;
 
+    public Transform rangePreview;
+
     private void Start() {
         StartCoroutine(attackCoroutine());
     }
@@ -18,6 +20,7 @@ public class AuraWeapon : MonoBehaviour
     void Update()
     {
         transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
+        rangePreview.localScale = Vector3.one * radius * 2f;
     }
 
     IEnumerator attackCoroutine() {
