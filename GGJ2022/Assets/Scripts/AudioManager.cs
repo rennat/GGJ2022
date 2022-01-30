@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip playerTakesDamage;
     public AudioClip enemyTakesDamage;
     public AudioClip enemyDisarmed;
+    public AudioClip powerUpPickedUp;
 
     private void Start()
     {
@@ -21,4 +22,5 @@ public class AudioManager : MonoBehaviour
     public static void PlayerTakesDamage() => instance.soundFXAudioSource.PlayOneShot(instance.playerTakesDamage);
     public static void EnemyTakesDamage() => instance.soundFXAudioSource.PlayOneShot(instance.enemyTakesDamage);
     public static void EnemyDisarmed() => instance.soundFXAudioSource.PlayOneShot(instance.enemyDisarmed);
+    public static void PowerUpPickedUp() => instance.soundFXAudioSource.PlayOneShot(instance.powerUpPickedUp);
 }

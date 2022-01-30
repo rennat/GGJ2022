@@ -39,4 +39,6 @@ public class WeaponStats : ScriptableObject
     public float WeaponSize => CurrentProfile.weaponSize;
     public float WeaponSpeed => CurrentProfile.weaponSpeed;
     public float Cooldown => CurrentProfile.cooldown;
+
+    public float Upgrade() => currentProfile = Mathf.Min(currentProfile + 1, profiles.Count - 1);
 }

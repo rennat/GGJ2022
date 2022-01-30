@@ -23707,12 +23707,21 @@ MonoBehaviour:
   currentXP: 0
   maxHealth: 100
   wood: 1000
-  levelBaseXP: 400
+  levelBaseXP: 100
   levelXPMultiplier: 1.25
   powerUps:
-  - {fileID: 1047238085}
-  - {fileID: 650581054}
-  - {fileID: 779595523}
+  - icon: {fileID: -166288785, guid: 2868a40a7a0f7794eb59e90c4d5ac2ca, type: 3}
+    weapon: {fileID: 1047238085}
+    weaponStats: {fileID: 11400000, guid: 4790a27cffd54a1418fa79fc8f73a420, type: 2}
+    prefab: {fileID: 2762105166048362746, guid: 5475c1eaf6af7e24dab8763930db9962, type: 3}
+  - icon: {fileID: 21300000, guid: 76cc43c2aad2c8047b8509d200331087, type: 3}
+    weapon: {fileID: 650581054}
+    weaponStats: {fileID: 11400000, guid: 2cfe73b41def48549b11028114dcba69, type: 2}
+    prefab: {fileID: 2762105166048362746, guid: 5475c1eaf6af7e24dab8763930db9962, type: 3}
+  - icon: {fileID: 4946718612296158970, guid: 0cb26d670529c8a41b66ffcde7ef7e43, type: 3}
+    weapon: {fileID: 779595523}
+    weaponStats: {fileID: 11400000, guid: f2b38270de082224ba165f365a869f2d, type: 2}
+    prefab: {fileID: 2762105166048362746, guid: 5475c1eaf6af7e24dab8763930db9962, type: 3}
 --- !u!4 &306718577609373950
 Transform:
   m_ObjectHideFlags: 0

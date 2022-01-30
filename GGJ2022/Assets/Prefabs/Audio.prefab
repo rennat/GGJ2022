@@ -307,3 +307,4 @@ MonoBehaviour:
   playerTakesDamage: {fileID: 8300000, guid: 717f629557c500e4b9ba2fce9e34f283, type: 3}
   enemyTakesDamage: {fileID: 8300000, guid: f7c555902caa38a45ae0792e61223b06, type: 3}
   enemyDisarmed: {fileID: 8300000, guid: 68e35de993d96ac409176d03b7889f30, type: 3}
+  powerUpPickedUp: {fileID: 8300000, guid: ad703abfb82e4a5478307268a23123c8, type: 3}

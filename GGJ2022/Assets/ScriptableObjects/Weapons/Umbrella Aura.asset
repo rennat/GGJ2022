@@ -24,7 +24,7 @@ MonoBehaviour:
     aoeRadius: 0
     aoeLimit: 0
     weaponSize: 1
-    weaponSpeed: 2
+    weaponSpeed: 50
     cooldown: 1
   - range: 0
     rateOfFire: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     aoeRadius: 0
     aoeLimit: 0
     weaponSize: 1
-    weaponSpeed: 2.4
+    weaponSpeed: 70
     cooldown: 1
   - range: 0
     rateOfFire: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
     aoeRadius: 0
     aoeLimit: 0
     weaponSize: 1.2
-    weaponSpeed: 2.4
+    weaponSpeed: 70
     cooldown: 1
   - range: 0
     rateOfFire: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
     aoeRadius: 0
     aoeLimit: 0
     weaponSize: 1.2
-    weaponSpeed: 2.4
+    weaponSpeed: 70
     cooldown: 0.8
   - range: 0
     rateOfFire: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
     aoeRadius: 0
     aoeLimit: 0
     weaponSize: 1.2
-    weaponSpeed: 2.8
+    weaponSpeed: 90
     cooldown: 0.8
   - range: 0
     rateOfFire: 0
@@ -84,5 +84,5 @@ MonoBehaviour:
     aoeRadius: 0
     aoeLimit: 0
     weaponSize: 1.4
-    weaponSpeed: 2.8
+    weaponSpeed: 90
     cooldown: 0.8
